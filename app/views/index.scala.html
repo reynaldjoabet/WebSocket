@@ -1,9 +1,10 @@
 @()(implicit requestHeader: RequestHeader)
 @main("WebSocket"){
-    <input type="text" id="chats" size="70">
+    <input type="hidden" id="route" value="@routes.HomeController.socket().absoluteURL()">
+    <input type="text" id="chats" size="80"><input>
     <br>
     <textarea id="message-input" rows="17" cols="80"></textarea>
 
 
-
+    <script src="@routes.Assets.versioned("javascripts/chat.js")" type="text/javascript"></script>
 }

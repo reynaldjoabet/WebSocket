@@ -2,11 +2,14 @@ package controllers
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 //clientActor is provided by Play and is used ti communicate with the client( curl or a browser)
-class ChatActor(clientActor:ActorRef) extends Actor with ActorLogging{
+class ChatActor(clientActor:ActorRef) extends Actor{
+  val logger=play.api.Logger(this.getClass)
   override def receive: Receive = {
-    case ms: String=>log.info("Connected to client")
+    case ms: String=>
+      logger.info("Connected to client")
       clientActor! s" Client said $ms"
     clientActor ! "Thank you for connecting"
+      logger.info("replied Client")
   }
 }
 object ChatActor{
