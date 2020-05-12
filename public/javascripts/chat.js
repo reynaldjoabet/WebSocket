@@ -1,9 +1,17 @@
 const inputField=document.getElementById("chats");
 const message=document.getElementById("message-input");
+
+/*
 const socketRoute=document.getElementById("route").value;
-/* create a socket and replace http with ws, which is for sockets */
+ //create a socket and replace http with ws, which is for sockets
 const socket= new WebSocket(socketRoute.replace("http","ws"));
-//("ws://localhost:9000/ws")
+instead of const socket= new WebSocket(socketRoute.replace("http","ws"));,
+//we can do just use the path directly.The above 3 lines is equivalent to the following
+const socket= new WebSocket("ws://localhost:9000/ws");
+*/
+
+const socket= new WebSocket("ws://localhost:9000/ws");
+
 inputField.onkeydown=(event)=>{
     if(event.key==='Enter') {
         //convert to js object
@@ -30,7 +38,7 @@ socket.onmessage=(event)=>{
 //()=>socket.send(JSON.stringify("Hello from browser"));
 // this like others with (),represent and anonymous function
 
-var imessage= {key:"Hello from browser"};
+var imessage= {key:"New Chatter Connected"};
 socket.onopen= ()=>socket.send(JSON.stringify(imessage));
 
 // We get JSON data from actor and parse before displaying

@@ -1,6 +1,6 @@
 @()(implicit requestHeader: RequestHeader)
 @main("WebSocket"){
-    <input type="hidden" id="route" value="@routes.HomeController.socket().absoluteURL()">
+   @* <input type="hidden" id="route" value="@routes.HomeController.socket().absoluteURL()"> *@
     <input type="text" id="chats" size="80"><input>
     <br>
     <textarea id="message-input" rows="17" cols="80"></textarea>

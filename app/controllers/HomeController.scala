@@ -13,7 +13,10 @@ import play.api.mvc._
  */
 @Singleton
 class HomeController @Inject()(cc: ControllerComponents)(implicit system:ActorSystem,mat:Materializer) extends AbstractController(cc) {
+
 val logger=play.api.Logger(this.getClass)//val logger=play.api.Logger(getClass)
+  val manager=system.actorOf(ChatManager.props,"Manager")
+
   def index = Action {implicit requestHeader:RequestHeader=>
     logger.info("index page")
     Ok(views.html.index())
@@ -22,7 +25,7 @@ val logger=play.api.Logger(this.getClass)//val logger=play.api.Logger(getClass)
     //a normal request is converted into a websocket
     logger.info("Websocket called")
     ActorFlow.actorRef{client=>
-      ChatActor.props(client)
+      ChatActor.props(client,manager)
 
     }
   }
